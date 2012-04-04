@@ -64,4 +64,4 @@ class FormOptionsHelper
     else
       selected = Array.wrap(selected)
       options = selected.extract_options()
-      [ if options.selected? then options.selected then selected, options.disabled ]
+      [ (if options.selected? then options.selected else selected), options.disabled ]
