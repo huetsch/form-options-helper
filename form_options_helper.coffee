@@ -12,13 +12,15 @@ TagHelper = require 'tag-helper'
 class FormOptionsHelper
   options_for_select: (container, selected = null) =>
     return container if typeof(container) is 'string'
-
     [selected, disabled] = @extract_selected_and_disabled(selected).map (r) ->
-       Array.wrap(r).map (item) ->
-         if item instanceof String
-           item
-         else
-           String(item)
+      Array.wrap(r).map (item) ->
+        if item instanceof String
+          item
+        else
+          String(item)
+
+    if Object.isPlainObject(container)
+      container = Object.toArray(container)
 
     container.map((element) =>
       html_attributes = @option_html_attributes(element)
