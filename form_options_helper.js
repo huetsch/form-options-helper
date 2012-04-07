@@ -1,16 +1,26 @@
 (function() {
-  var FormOptionsHelper, TagHelper,
+  var FormOptionsHelper, TagHelper, helper,
+    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
     __hasProp = Object.prototype.hasOwnProperty,
     __indexOf = Array.prototype.indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
+
+  require('cream');
 
   TagHelper = require('tag-helper');
 
   FormOptionsHelper = (function() {
 
-    function FormOptionsHelper() {}
+    function FormOptionsHelper() {
+      this.extract_selected_and_disabled = __bind(this.extract_selected_and_disabled, this);
+      this.is_option_value_selected = __bind(this.is_option_value_selected, this);
+      this.option_text_and_value = __bind(this.option_text_and_value, this);
+      this.option_html_attributes = __bind(this.option_html_attributes, this);
+      this.options_for_select = __bind(this.options_for_select, this);
+    }
 
     FormOptionsHelper.prototype.options_for_select = function(container, selected) {
-      var disabled, _ref;
+      var disabled, _ref,
+        _this = this;
       if (selected == null) selected = null;
       if (typeof container === 'string') return container;
       _ref = this.extract_selected_and_disabled(selected).map(function(r) {
@@ -22,23 +32,24 @@
           }
         });
       }), selected = _ref[0], disabled = _ref[1];
+      if (Object.isPlainObject(container)) container = Object.toArray(container);
       return container.map(function(element) {
         var disabled_attribute, html_attributes, selected_attribute, text, value, _ref2;
-        html_attributes = this.option_html_attributes(element);
-        _ref2 = this.option_text_and_value(element).map(function(item) {
+        html_attributes = _this.option_html_attributes(element);
+        _ref2 = _this.option_text_and_value(element).map(function(item) {
           if (item instanceof String) {
             return item;
           } else {
             return String(item);
           }
         }), text = _ref2[0], value = _ref2[1];
-        if (this.is_option_value_selected(value, selected)) {
+        if (_this.is_option_value_selected(value, selected)) {
           selected_attribute = ' selected="selected"';
         }
-        if (disabled && this.is_option_value_selected(value, disabled)) {
+        if (disabled && _this.is_option_value_selected(value, disabled)) {
           disabled_attribute = ' disabled="disabled"';
         }
-        return "<option value=\"" + (TagHelper.html_escape(value)) + "\"" + selected_attribute + disabled_attribute + html_attributes + ">" + (TagHelper.html_escape(text)) + "</option>";
+        return "<option value=\"" + (TagHelper.html_escape(value)) + "\"" + (selected_attribute || '') + (disabled_attribute || '') + (html_attributes || '') + ">" + (TagHelper.html_escape(text)) + "</option>";
       }).join("\n").html_safe();
     };
 
@@ -58,6 +69,7 @@
     };
 
     FormOptionsHelper.prototype.option_text_and_value = function(option) {
+      var _this = this;
       if (option instanceof Array) {
         option = option.reject(function(e) {
           return Object.isPlainObject(e);
@@ -94,5 +106,9 @@
     return FormOptionsHelper;
 
   })();
+
+  helper = new FormOptionsHelper();
+
+  exports.options_for_select = helper.options_for_select;
 
 }).call(this);

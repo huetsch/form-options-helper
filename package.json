@@ -10,7 +10,7 @@
         "cream": ">= 0.0.18"
     },
     "main": "./form_options_helper.js",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "author": "Mark Huetsch <markhuetsch@gmail.com>",
     "license": "MIT"
 }
