@@ -1,13 +1,16 @@
 {
-  "name": "form-options-helper",
-  "description": "Rails' FormOptionsHelper ported to Javascript",
-  "keywords": ["rails", "form-options-helper"],
-  "homepage": "https://github.com/huetsch/form-options-helper",
-  "dependencies": {
-    "cream": ">= 0.0.18"
-  },
-  "main": "./form_options_helper.js",
-  "version": "0.0.1",
-  "author": "Mark Huetsch <markhuetsch@gmail.com>",
-  "license": "MIT"
+    "name": "form-options-helper",
+    "description": "Rails' FormOptionsHelper ported to Javascript",
+    "keywords": [
+        "rails",
+        "form-options-helper"
+    ],
+    "homepage": "https://github.com/huetsch/form-options-helper",
+    "dependencies": {
+        "cream": ">= 0.0.18"
+    },
+    "main": "./form_options_helper.js",
+    "version": "0.0.2",
+    "author": "Mark Huetsch <markhuetsch@gmail.com>",
+    "license": "MIT"
 }
