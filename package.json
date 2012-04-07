@@ -7,10 +7,11 @@
     ],
     "homepage": "https://github.com/huetsch/form-options-helper",
     "dependencies": {
-        "cream": ">= 0.0.18"
+        "cream": ">= 0.0.18",
+        "tag-helper": ">= 0.0.11"
     },
     "main": "./form_options_helper.js",
-    "version": "0.0.3",
+    "version": "0.0.5",
     "author": "Mark Huetsch <markhuetsch@gmail.com>",
     "license": "MIT"
 }
